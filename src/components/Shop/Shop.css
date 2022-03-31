@@ -22,6 +22,14 @@
 .cart-container div{
     width: 200px;
 }
+.review-order{
+    text-decoration: none;
+    background-color: coral;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
+}
 @media only screen and (max-width: 600px) {
     .shop-container{
         grid-template-columns: 1fr;

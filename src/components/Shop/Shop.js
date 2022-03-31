@@ -1,36 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { addToDb, getStorage } from '../../utilities/fakedb';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useCart from '../../hooks/useCart';
+import useProducts from '../../hooks/Useproducts';
+import { addToDb } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css'
 
 const Shop = () => {
-    //load data from api
-    const [products,setProducts]=useState([])
-    useEffect(()=>{
-        fetch('products.json')
-        .then(res=> res.json())
-        .then(data => setProducts(data))
-    },[])
-    
-    //display local storage data to ui
-    useEffect(()=>{
-        const allSavedPd= [];
-        const cartDb= getStorage()
-            
-        for(const id in cartDb){   
-            const savedPd = products.find(product=> product.id===id)
-            if(savedPd){
-                const quantity= cartDb[id];
-                savedPd["quantity"]=quantity;
-                allSavedPd.push(savedPd)
-            }
-        }
-        setCart(allSavedPd)
-    
-    },[products])
-    //add to cart state & set local storage 
-    const [cart,setCart]= useState([])
+    const [products,setProducts]= useProducts();
+
+    const [cart,setCart]= useCart(products);
+
     const addToCart=(product)=>{
         const exist = cart.find(pd=> pd.id=== product.id);
         if(!exist){
@@ -50,11 +31,10 @@ const Shop = () => {
                 products.map(product=><Product key={product.id} product={product} addToCart={addToCart}></Product>)
             }
             </div>
-            <div className="cart-container">
-                <div>
-                    <h2>Order Review</h2>
-                    <Cart cart={cart}></Cart>
-                </div>
+            <div >
+                <Cart cart={cart}>
+                    <Link className='review-order' to={'/order'}>Review Order</Link>
+                </Cart>
             </div>
         </section>
     );
