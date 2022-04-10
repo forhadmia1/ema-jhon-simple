@@ -10,8 +10,8 @@ const Order = () => {
     const [products, setProducts] = useProducts()
     const [cart, setCart] = useCart(products);
 
-    const deleteItem=id=>{
-        const rest= cart.filter(item=> item.id!== id)
+    const deleteItem = id => {
+        const rest = cart.filter(item => item.id !== id)
         setCart(rest)
         removeFromDb(id)
     }
@@ -24,7 +24,7 @@ const Order = () => {
             }
 
             <Cart cart={cart}>
-                <Link className='review-order' to={''}>Procced Checkout</Link>
+                <Link className='review-order' to={'/shipment'}>Procced Checkout</Link>
             </Cart>
         </div>
     );

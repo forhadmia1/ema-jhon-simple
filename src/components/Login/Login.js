@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import auth from '../../firebase.init';
 import './Login.css'
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const [
         signInWithEmailAndPassword,
@@ -28,7 +29,7 @@ const Login = () => {
         signInWithEmailAndPassword(email, password)
     }
     if (user) {
-        navigate('/shop')
+        navigate(from, { replace: true })
     }
 
 
@@ -46,6 +47,7 @@ const Login = () => {
                         <label htmlFor="password">Password</label>
                         <input onBlur={getPassword} type="password" name="password" id="" required />
                     </div>
+                    <p className='error'>{hookError && hookError.message}</p>
                     <input className='submit-btn' type="submit" value="Log In" />
                 </form>
                 <p className='form-link'>New to Emajhon? <Link to={'/signup'}>Create an account</Link></p>
