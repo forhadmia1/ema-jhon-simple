@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useNavigate } from 'react-router-dom';
+import GoogleSignin from '../GoogleSignin/GoogleSignin';
 
 const Signup = () => {
     const [email, setEmail] = useState('')
@@ -63,7 +64,7 @@ const Signup = () => {
                 </form>
                 <p className='form-link'>Have an account?<Link to={'/login'}>Log In</Link></p>
                 <p className='or'>or</p>
-                <button className='google-btn'>Continue with Google</button>
+                <GoogleSignin />
             </div>
         </div>
     );

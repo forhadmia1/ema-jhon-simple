@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import auth from '../../firebase.init';
+import GoogleSignin from '../GoogleSignin/GoogleSignin';
 import './Login.css'
 
 const Login = () => {
@@ -52,7 +53,7 @@ const Login = () => {
                 </form>
                 <p className='form-link'>New to Emajhon? <Link to={'/signup'}>Create an account</Link></p>
                 <p className='or'>or</p>
-                <button className='google-btn'>Continue with Google</button>
+                <GoogleSignin />
             </div>
         </div>
     );

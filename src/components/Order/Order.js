@@ -1,17 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useCart from '../../hooks/useCart';
-import useProducts from '../../hooks/Useproducts';
 import { removeFromDb } from '../../utilities/fakedb';
 import Cart from '../Cart/Cart';
 import Orderd from '../Ordered/Orderd';
 
 const Order = () => {
-    const [products, setProducts] = useProducts()
-    const [cart, setCart] = useCart(products);
+    const [cart, setCart] = useCart();
 
     const deleteItem = id => {
-        const rest = cart.filter(item => item.id !== id)
+        const rest = cart.filter(item => item._id !== id)
         setCart(rest)
         removeFromDb(id)
     }
@@ -20,7 +18,7 @@ const Order = () => {
     return (
         <div style={{ marginTop: '150px' }}>
             {
-                cart.map(item => <Orderd item={item} key={item.id} deleteItem={deleteItem}></Orderd>)
+                cart.map(item => <Orderd item={item} key={item._id} deleteItem={deleteItem}></Orderd>)
             }
 
             <Cart cart={cart}>

@@ -30,6 +30,19 @@
     font-weight: bold;
     color: white;
 }
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+.pagination button{
+    margin-right: 10px;
+    border: 1px solid red;
+    padding: 5px 8px ;
+}
+.selected{
+    background-color: coral;
+}
 @media only screen and (max-width: 600px) {
     .shop-container{
         grid-template-columns: 1fr;
